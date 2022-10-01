@@ -1,29 +1,29 @@
-function sumarUno( numero ) {
-    
-    var promesa = new Promise(function(resolve, reject ){
-        console.log(numero);
-        if(numero >= 7 ) {
-            reject('el numero es muy alto');
-        }
-        
-        setTimeout(function() {
-    
-            resolve (numero + 1);
-        
-        }, 800);
-    });
-    
-     return promesa;
-}
-sumarUno(5)
-     .then(sumarUno)
-     .then(sumarUno)
-     .then(sumarUno)
-     .then(nuevoNumero => {
-        console.log(nuevoNumero);
-     })
-     .catch(error => {
-        console.log('ERROR EN PROMESA');
-        console.log(error);
-     });
+function sumarUno(numero, callback) {
+    if(numero >= 7) {
+        callback('Numero muy alto');
+        return;
+    }
 
+    setTimeout(function() {
+      callback(null, numero + 1);
+     }, 800);
+}
+sumarUno(5, function(error, nuevoValor) {
+    if(error) {
+        console.log(error);
+        return;
+    }
+    sumarUno(nuevoValor, function(error, nuevoValor2) {
+        if(error) {
+            console.log(error);
+            return;
+        }
+        sumarUno(nuevoValor2, function(error, nuevoValor3) {
+            if(error) {
+                console.log(error);
+                return;
+            }
+            console.log(nuevoValor3);
+        });
+    });
+});
