@@ -1,13 +1,13 @@
-var request = new XMLHttpRequest();
-request.open('GET', 'https://reqres.in/api/users', true);
-request.send(null);
+var resquest = new XMLHttpRequest();
 
-request.onreadystatechange = function( state ) {
-    if (request.readyState === 4) {
+resquest.open('GET', 'https://reqres.in/api/users', true);
+resquest.send(null);
 
-        var resp = request.response;
-        var respObj = JSON.parse( resp );
-        console.log( respObj );
+resquest.onreadystatechange = function( state ) {
+    if( resquest.readyState === 4 ) {
+        var resp = resquest.response;
+        var respObj = JSON.parse( resp);
+
+        console.log( respObj);
     }
-};
-
+}
